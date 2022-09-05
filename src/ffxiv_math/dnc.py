@@ -161,8 +161,8 @@ def calc_damage(
     crit_damage = damage * (1000 * crit_damage_mod) // 1000
     dh_damage = damage * 1250 // 1000
     crit_dh_damage = crit_damage * 1250 // 1000
-    crit_rate = get_crit_rate(stats.crit) + crit_rate_bonus
-    dh_rate = get_dh_rate(stats.dh) + dh_rate_bonus
+    crit_rate = 1 if auto_crit else get_crit_rate(stats.crit) + crit_rate_bonus
+    dh_rate = 1 if auto_dh else get_dh_rate(stats.dh) + dh_rate_bonus
 
     return DamageInfo(
         hit=damage,

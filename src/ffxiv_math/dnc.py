@@ -132,18 +132,13 @@ def calc_damage(
     crit_rate_bonus: float,
     dh_rate_bonus: float,
     damage_bonuses: list[float],
-    auto_dh: bool = False,
-    auto_crit: bool = False,
+    auto_dh: int = 0,
+    auto_crit: int = 0,
 ) -> DamageInfo:
 
     crit_damage_mod = get_crit_damage(stats.crit)
 
-    auto_type_mods = 1
-    if auto_crit:
-        auto_type_mods *= (1 + crit_damage_mod * crit_rate_bonus)
-    if auto_dh:
-        auto_type_mods *= (1 + dh_rate_bonus * 0.25)
-
+    auto_type_mods = 1 * (1 + crit_damage_mod * crit_rate_bonus * auto_crit) * (1 + dh_rate_bonus * 0.25 * auto_dh)
 
     trait_bonus = 1.3  # 1.3; trait bonuses @ 90, f_tnc step skipped for dnc
 
